@@ -75,6 +75,7 @@
   background: transparent;
   font-size: 13.5px;
   line-height: 1.75;
+  overflow-x: auto;
 }
 
 .terminal .term-comment {
