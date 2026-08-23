@@ -103,7 +103,11 @@ h6 {
   text-wrap: balance;
 }
 
-h1 { font-size: var(--heading-font-size-xxl); font-weight: 640; }
+h1 {
+  font-size: var(--heading-font-size-xxl);
+  font-weight: 640;
+}
+
 h2 { font-size: var(--heading-font-size-xl); }
 h3 { font-size: var(--heading-font-size-l); }
 h4 { font-size: var(--heading-font-size-m); }
@@ -316,6 +320,12 @@ main > .section:first-of-type {
   }
 }
 
+/* prose rhythm inside sections */
+main .section h2 + p,
+main .section h3 + p {
+  margin-top: 0.6em;
+}
+
 /* section variants (set via section metadata `style`) */
 main .section.ruled {
   position: relative;
@@ -358,12 +368,6 @@ main .section.center p:not(:has(> em:only-child)) {
 
 main .section.narrow > div {
   max-width: 840px;
-}
-
-/* prose rhythm inside sections */
-main .section h2 + p,
-main .section h3 + p {
-  margin-top: 0.6em;
 }
 
 main .section table {

@@ -42,7 +42,7 @@ function makeViz(canvas) {
   }
 
   function barY(i) {
-    return h * 0.22 + i * (h * 0.56 / 4);
+    return h * 0.22 + i * ((h * 0.56) / 4);
   }
 
   function step() {
