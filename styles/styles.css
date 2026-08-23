@@ -1,83 +1,71 @@
 /*
- * Copyright 2020 Adobe. All rights reserved.
- * This file is licensed to you under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
+ * QMD — ember archive design system
+ * Warm near-black, paper-white type, ember accent.
+ * Display: Fraunces. Mono: JetBrains Mono. Body: system sans.
  */
 
 :root {
-  /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  /* palette */
+  --bg: #0c0a08;
+  --bg-raise: #131009;
+  --surface: #191510;
+  --surface-2: #221b12;
+  --border: rgb(242 236 223 / 14%);
+  --border-soft: rgb(242 236 223 / 7%);
+  --text: #f2ecdf;
+  --text-soft: #cfc5b2;
+  --text-dim: #9c907a;
+  --ember: #ffa02e;
+  --ember-deep: #e06a10;
+  --ember-dim: rgb(255 160 46 / 13%);
+  --paper: #fff8ea;
+
+  /* boilerplate aliases (blocks may reference these) */
+  --background-color: var(--bg);
+  --light-color: var(--surface);
+  --dark-color: var(--text-soft);
+  --text-color: var(--text);
+  --link-color: #ffb45e;
+  --link-hover-color: #ffd196;
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --body-font-family: -apple-system, blinkmacsystemfont, 'Segoe UI', ui-sans-serif, roboto, helvetica, arial, sans-serif;
+  --heading-font-family: fraunces, fraunces-fallback, georgia, 'Times New Roman', serif;
+  --mono-font-family: jetbrains-mono, ui-monospace, 'SF Mono', menlo, consolas, monospace;
 
   /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  --body-font-size-m: 18px;
+  --body-font-size-s: 16px;
+  --body-font-size-xs: 14px;
 
   /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
+  --heading-font-size-xxl: clamp(42px, 7.5vw, 76px);
+  --heading-font-size-xl: clamp(32px, 4.5vw, 48px);
+  --heading-font-size-l: clamp(26px, 3.2vw, 34px);
+  --heading-font-size-m: 24px;
+  --heading-font-size-s: 20px;
+  --heading-font-size-xs: 16px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 72px;
 }
 
-/* fallback fonts */
+/* fallback font */
 @font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
-  src: local('Arial');
-}
-
-@font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
-  src: local('Arial');
-}
-
-@media (width >= 900px) {
-  :root {
-    /* body sizes */
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-
-    /* heading sizes */
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
-    --heading-font-size-xs: 18px;
-  }
+  font-family: fraunces-fallback;
+  size-adjust: 105%;
+  src: local('Georgia');
 }
 
 body {
   display: none;
   margin: 0;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--bg);
+  color: var(--text);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-  line-height: 1.6;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
 }
 
 body.appear {
@@ -93,8 +81,8 @@ footer .footer {
   visibility: hidden;
 }
 
-header .header[data-block-status="loaded"],
-footer .footer[data-block-status="loaded"] {
+header .header[data-block-status='loaded'],
+footer .footer[data-block-status='loaded'] {
   visibility: visible;
 }
 
@@ -105,19 +93,30 @@ h4,
 h5,
 h6 {
   margin-top: 0.8em;
-  margin-bottom: 0.25em;
+  margin-bottom: 0.3em;
   font-family: var(--heading-font-family);
   font-weight: 600;
-  line-height: 1.25;
-  scroll-margin: 40px;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+  scroll-margin: calc(var(--nav-height) + 24px);
+  text-wrap: balance;
 }
 
-h1 { font-size: var(--heading-font-size-xxl); }
+h1 { font-size: var(--heading-font-size-xxl); font-weight: 640; }
 h2 { font-size: var(--heading-font-size-xl); }
 h3 { font-size: var(--heading-font-size-l); }
 h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 h6 { font-size: var(--heading-font-size-xs); }
+
+h1 em,
+h2 em,
+h3 em {
+  font-style: italic;
+  font-weight: 580;
+  color: var(--ember);
+}
 
 p,
 dl,
@@ -129,27 +128,67 @@ blockquote {
   margin-bottom: 0.25em;
 }
 
+p {
+  color: var(--text-soft);
+}
+
+/* eyebrow: a paragraph that is only emphasis reads as a mono kicker */
+main p:has(> em:only-child) {
+  margin-bottom: 0;
+  font-family: var(--mono-font-family);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ember);
+}
+
+main p:has(> em:only-child) em {
+  font-style: normal;
+}
+
+/* code */
 code,
-pre {
+pre,
+samp,
+kbd {
+  font-family: var(--mono-font-family);
   font-size: var(--body-font-size-s);
 }
 
+code {
+  padding: 0.15em 0.45em;
+  border-radius: 6px;
+  border: 1px solid var(--border-soft);
+  background-color: var(--surface);
+  color: var(--text);
+  font-size: 0.85em;
+  overflow-wrap: break-word;
+}
+
 pre {
-  padding: 16px;
-  border-radius: 8px;
-  background-color: var(--light-color);
+  padding: 20px 24px;
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  background-color: var(--bg-raise);
+  color: var(--text-soft);
+  line-height: 1.65;
   overflow-x: auto;
   white-space: pre;
 }
 
-main > div {
-  margin: 40px 16px;
+pre code {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 14px;
+  color: inherit;
 }
 
-input,
-textarea,
-select,
-button {
+main input,
+main textarea,
+main select,
+main button {
   font: inherit;
 }
 
@@ -163,11 +202,13 @@ a:any-link {
 a:hover {
   color: var(--link-hover-color);
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* buttons */
 p.button-wrapper {
-  margin: 12px 0;
+  margin: 14px 0;
+  display: inline-block;
 }
 
 a.button:any-link,
@@ -177,105 +218,64 @@ button.button {
   align-items: center;
   justify-content: center;
   max-width: 100%;
-  margin: 0;
-  border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  margin: 0 8px 0 0;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 0.65em 1.4em;
   font: inherit;
-  font-weight: 500;
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
   line-height: 1.25;
   text-decoration: none;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-a.button[aria-disabled="true"],
-button.button:disabled {
-  cursor: not-allowed;
-  pointer-events: none;
+  transition: border-color 0.18s ease, background-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
 }
 
 a.button.primary,
-button.button.primary {
-  border-color: var(--text-color);
-  background-color: var(--text-color);
-  color: var(--background-color);
+button.button.primary,
+a.button.accent,
+button.button.accent {
+  border-color: var(--ember);
+  background-color: var(--ember);
+  color: #1a1006;
 }
 
 a.button.primary:hover,
 a.button.primary:focus-visible,
 button.button.primary:hover,
-button.button.primary:focus-visible {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
-  color: var(--light-color);
-}
-
-a.button.primary[aria-disabled="true"],
-a.button.primary[aria-disabled="true"]:hover,
-a.button.primary[aria-disabled="true"]:focus-visible,
-button.button.primary:disabled,
-button.button.primary:disabled:hover,
-button.button.primary:disabled:focus-visible {
-  background-color: var(--light-color);
-  border-color: var(--light-color);
-  color: var(--dark-color);
+a.button.accent:hover,
+a.button.accent:focus-visible {
+  border-color: var(--link-hover-color);
+  background-color: var(--link-hover-color);
+  color: #1a1006;
+  box-shadow: 0 0 32px rgb(255 160 46 / 25%);
+  text-decoration: none;
 }
 
 a.button.secondary,
 button.button.secondary {
-  border-color: var(--text-color);
+  border-color: var(--border);
   background-color: transparent;
-  color: var(--text-color);
+  color: var(--text);
 }
 
 a.button.secondary:hover,
 a.button.secondary:focus-visible,
-button.button.secondary:hover,
-button.button.secondary:focus-visible {
-  border-color: var(--dark-color);
-  background-color: var(--light-color);
-  color: var(--dark-color);
+button.button.secondary:hover {
+  border-color: var(--text-dim);
+  background-color: var(--surface);
+  color: var(--paper);
+  text-decoration: none;
 }
 
-a.button.secondary[aria-disabled="true"],
-a.button.secondary[aria-disabled="true"]:hover,
-a.button.secondary[aria-disabled="true"]:focus-visible,
-button.button.secondary:disabled,
-button.button.secondary:disabled:hover,
-button.button.secondary:disabled:focus-visible {
-  background-color: var(--light-color);
-  border-color: var(--light-color);
-  color: var(--dark-color);
-}
-
-/* high-impact call-to-action */
-a.button.accent,
-button.button.accent {
-  border-color: var(--link-color);
-  background-color: var(--link-color);
-  color: var(--background-color);
-}
-
-a.button.accent:hover,
-a.button.accent:focus-visible,
-button.button.accent:hover,
-button.button.accent:focus-visible {
-  border-color: var(--link-hover-color);
-  background-color: var(--link-hover-color);
-}
-
-a.button.accent[aria-disabled="true"],
-a.button.accent[aria-disabled="true"]:hover,
-a.button.accent[aria-disabled="true"]:focus-visible,
-button.button.accent:disabled,
-button.button.accent:disabled:hover,
-button.button.accent:disabled:focus-visible {
-  background-color: var(--light-color);
-  border-color: var(--light-color);
-  color: var(--dark-color);
+a.button[aria-disabled='true'],
+button.button:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.45;
 }
 
 main img {
@@ -297,11 +297,11 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: 88px 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: 1160px;
   margin: auto;
   padding: 0 24px;
 }
@@ -316,10 +316,62 @@ main > .section:first-of-type {
   }
 }
 
-/* section metadata */
-main .section.light,
-main .section.highlight {
-  background-color: var(--light-color);
+/* section variants (set via section metadata `style`) */
+main .section.ruled {
+  position: relative;
+  padding-top: 56px;
+}
+
+main .section.ruled::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1160px - 48px, calc(100% - 48px));
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border) 18%, var(--border) 82%, transparent);
+}
+
+main .section.ember {
+  position: relative;
   margin: 0;
-  padding: 40px 0;
+  padding: 88px 0;
+  background:
+    radial-gradient(52% 42% at 50% 0%, rgb(255 138 26 / 9%), transparent 70%),
+    var(--bg-raise);
+}
+
+main .section.center {
+  text-align: center;
+}
+
+main .section.center h2,
+main .section.center p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main .section.center p:not(:has(> em:only-child)) {
+  max-width: 62ch;
+}
+
+main .section.narrow > div {
+  max-width: 840px;
+}
+
+/* prose rhythm inside sections */
+main .section h2 + p,
+main .section h3 + p {
+  margin-top: 0.6em;
+}
+
+main .section table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+::selection {
+  background: rgb(255 160 46 / 30%);
+  color: var(--paper);
 }

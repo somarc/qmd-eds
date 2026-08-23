@@ -1,27 +1,90 @@
 .cards > ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
+  gap: 16px;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
 }
 
 .cards > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  background: var(--bg-raise);
+  overflow: hidden;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.cards > ul > li:hover {
+  border-color: rgb(255 160 46 / 30%);
+  transform: translateY(-2px);
 }
 
 .cards .cards-card-body {
-  margin: 16px;
+  margin: 20px;
+}
+
+.cards .cards-card-body p {
+  font-size: 15px;
+  color: var(--text-dim);
 }
 
 .cards .cards-card-image {
   line-height: 0;
 }
 
-.cards > ul > li img {
+.cards .cards-card-image img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+/* changelog variant: rows of [version, note] */
+.cards.changelog > ul {
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.cards.changelog > ul > li {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding: 18px 22px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.cards.changelog > ul > li:hover {
+  transform: none;
+  background: rgb(255 160 46 / 4%);
+}
+
+.cards.changelog .cards-card-body {
+  margin: 0;
+}
+
+.cards.changelog .cards-card-body:first-child {
+  flex: 0 0 auto;
+  font-family: var(--mono-font-family);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ember);
+  white-space: nowrap;
+}
+
+.cards.changelog .cards-card-body:first-child p {
+  margin: 0;
+  color: inherit;
+}
+
+.cards.changelog .cards-card-body:last-child p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-soft);
+}
+
+@media (width >= 640px) {
+  .cards.changelog .cards-card-body:first-child {
+    min-width: 84px;
+  }
 }

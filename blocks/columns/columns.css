@@ -1,10 +1,13 @@
 .columns > div {
   display: flex;
   flex-direction: column;
+  gap: 24px;
 }
 
 .columns img {
   width: 100%;
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
 }
 
 .columns > div > div {
@@ -13,17 +16,36 @@
 
 .columns > div > .columns-img-col {
   order: 0;
+  line-height: 0;
 }
 
-.columns > div > .columns-img-col img {
-  display: block;
+.columns h2,
+.columns h3 {
+  margin-top: 0.4em;
+}
+
+.columns p {
+  color: var(--text-soft);
+}
+
+.columns ul {
+  padding-left: 20px;
+  color: var(--text-soft);
+}
+
+.columns ul li {
+  margin: 10px 0;
+}
+
+.columns ul li::marker {
+  color: var(--ember);
 }
 
 @media (width >= 900px) {
   .columns > div {
     align-items: center;
     flex-direction: unset;
-    gap: 24px;
+    gap: 64px;
   }
 
   .columns > div > div {
