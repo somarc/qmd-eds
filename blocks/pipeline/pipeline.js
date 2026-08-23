@@ -177,9 +177,12 @@ export default function decorate(block) {
     const index = document.createElement('span');
     index.className = 'pipeline-index';
     index.textContent = String(i + 1).padStart(2, '0');
-    const name = document.createElement('h3');
-    name.textContent = nameCell ? nameCell.textContent.trim() : '';
-    const desc = document.createElement('p');
+    // move authored nodes intact (preserves da-live Canvas prose markers)
+    const name = document.createElement('div');
+    name.className = 'pipeline-name';
+    if (nameCell) name.append(...nameCell.childNodes);
+    const desc = document.createElement('div');
+    desc.className = 'pipeline-desc';
     if (descCell) desc.append(...descCell.childNodes);
     li.append(index, name, desc);
     steps.append(li);
@@ -212,6 +215,13 @@ export default function decorate(block) {
   }
 
   const io = new IntersectionObserver((entries) => {
+    // self-clean when the block is replaced (e.g. editor body refresh)
+    if (!block.isConnected) {
+      io.disconnect();
+      anim.stop();
+      window.clearInterval(cycleTimer);
+      return;
+    }
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         if (reduced) {
@@ -230,11 +240,16 @@ export default function decorate(block) {
   io.observe(block);
 
   let resizeTimer = 0;
-  window.addEventListener('resize', () => {
+  const onResize = () => {
+    if (!canvas.isConnected) {
+      window.removeEventListener('resize', onResize);
+      return;
+    }
     window.clearTimeout(resizeTimer);
     resizeTimer = window.setTimeout(() => {
       if (reduced) anim.staticFrame();
       else anim.resize();
     }, 150);
-  });
+  };
+  window.addEventListener('resize', onResize);
 }

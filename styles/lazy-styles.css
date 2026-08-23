@@ -32,3 +32,13 @@ button:focus-visible {
   outline-offset: 3px;
   border-radius: 4px;
 }
+
+/* glass surfaces fall back to near-opaque paint when transparency is reduced */
+@media (prefers-reduced-transparency: reduce) {
+  header .nav-wrapper,
+  .hero .hero-chips li,
+  .hero .hero-install {
+    backdrop-filter: none;
+    background: var(--bg);
+  }
+}

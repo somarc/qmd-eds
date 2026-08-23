@@ -82,7 +82,7 @@
   color: var(--ember);
 }
 
-.pipeline .pipeline-steps h3 {
+.pipeline .pipeline-steps .pipeline-name {
   margin: 8px 0 0;
   font-family: var(--mono-font-family);
   font-size: 15px;
@@ -91,14 +91,24 @@
   color: var(--paper);
 }
 
-.pipeline .pipeline-steps p {
+.pipeline .pipeline-steps .pipeline-name > * {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+
+.pipeline .pipeline-steps .pipeline-desc {
   margin: 6px 0 0;
   font-size: 14px;
   line-height: 1.6;
   color: var(--text-dim);
 }
 
-.pipeline .pipeline-steps p code {
+.pipeline .pipeline-steps .pipeline-desc > * {
+  margin: 0;
+}
+
+.pipeline .pipeline-steps .pipeline-desc code {
   font-size: 0.88em;
 }
 

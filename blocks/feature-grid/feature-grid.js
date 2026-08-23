@@ -13,10 +13,13 @@ export default function decorate(block) {
     index.className = 'feature-grid-index';
     index.textContent = String(i + 1).padStart(2, '0');
 
-    const title = document.createElement('h3');
-    title.textContent = titleCell ? titleCell.textContent.trim() : '';
+    // move authored nodes intact (preserves da-live Canvas prose markers)
+    const title = document.createElement('div');
+    title.className = 'feature-grid-title';
+    if (titleCell) title.append(...titleCell.childNodes);
 
-    const desc = document.createElement('p');
+    const desc = document.createElement('div');
+    desc.className = 'feature-grid-desc';
     if (descCell) desc.append(...descCell.childNodes);
 
     li.append(index, title, desc);

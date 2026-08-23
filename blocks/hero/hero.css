@@ -7,7 +7,7 @@
   position: relative;
   display: flex;
   align-items: flex-end;
-  min-height: min(92vh, 960px);
+  min-height: min(92svh, 960px);
   padding: calc(var(--nav-height) + 48px) 24px 72px;
   overflow: hidden;
 }
@@ -104,6 +104,10 @@
   backdrop-filter: blur(8px);
 }
 
+.hero .hero-install > p {
+  margin: 0;
+}
+
 .hero .hero-install code {
   padding: 0;
   border: 0;
@@ -130,7 +134,8 @@
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
-.hero .hero-copy:hover {
+.hero .hero-copy:hover,
+.hero .hero-copy:focus-visible {
   color: var(--paper);
   border-color: var(--text-dim);
 }

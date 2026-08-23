@@ -42,7 +42,7 @@ function tint(code) {
 
 export default function decorate(block) {
   const rows = [...block.children];
-  let title = '';
+  let titleRow = null;
   let pre = null;
 
   rows.forEach((row) => {
@@ -50,9 +50,10 @@ export default function decorate(block) {
     if (rowPre) {
       pre = rowPre;
     } else if (row.textContent.trim()) {
-      title = row.textContent.trim();
+      titleRow = row;
     }
   });
+  const title = titleRow ? titleRow.textContent.trim() : '';
 
   if (!pre) return;
   const code = pre.querySelector('code') || pre;
@@ -63,9 +64,13 @@ export default function decorate(block) {
   const dots = document.createElement('span');
   dots.className = 'terminal-dots';
   dots.append(...[0, 1, 2].map(() => document.createElement('i')));
-  const titleEl = document.createElement('span');
+  // move the authored title node intact (preserves da-live Canvas prose markers)
+  const titleEl = document.createElement('div');
   titleEl.className = 'terminal-title';
-  titleEl.textContent = title;
+  if (titleRow) {
+    const cell = titleRow.firstElementChild;
+    titleEl.append(...(cell || titleRow).childNodes);
+  }
   const copy = document.createElement('button');
   copy.type = 'button';
   copy.className = 'terminal-copy';

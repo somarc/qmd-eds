@@ -8,7 +8,13 @@
 
 function buildInstallLine(p) {
   const code = p.querySelector('code');
-  p.classList.add('hero-install');
+  // wrap instead of classing/decorating the authored <p>:
+  // Canvas reconstructs marked fields from clean PM JSON, so classes
+  // and injected controls on the <p> itself are lost on editor mount.
+  const wrap = document.createElement('div');
+  wrap.className = 'hero-install';
+  p.before(wrap);
+  wrap.append(p);
   const button = document.createElement('button');
   button.type = 'button';
   button.className = 'hero-copy';
@@ -27,7 +33,7 @@ function buildInstallLine(p) {
       // clipboard unavailable; leave the text selectable
     }
   });
-  p.append(button);
+  wrap.append(button);
 }
 
 export default function decorate(block) {
